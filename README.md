@@ -1,259 +1,150 @@
-**Predicting Stock Market Volatility Using Machine Learning**
-
----
+# Market Regime Detection Project
 
 ## 1. Project Selection
 
-### Problem Statement
-
-This project aims to **predict short-term stock market volatility** using historical global stock market indicators.
-
-### Project Fit
-
-* ✔ Uses real-world financial data
-* ✔ Clear **regression** objective
-* ✔ Strong relevance to economics, finance, and risk management
-* ✔ Suitable for ML techniques and evaluation
-
-### ML Task Type
-
-* **Regression problem**
+* **Problem Statement:** Detect and classify different market regimes (e.g., bull, bear, sideways) using historical financial data.
+* **Goal:** Build a machine learning model that can classify the current market state based on relevant financial indicators.
+* **ML Task:** **Classification** – predicting discrete market regimes.
+* **Importance:** Accurate market regime detection can improve portfolio allocation, risk management, and trading strategies.
+* **Beneficiaries:** Traders, portfolio managers, financial analysts, and algorithmic trading systems.
 
 ---
 
 ## 2. Problem Definition
 
-### What is the problem?
+* **What is the problem?**
+  Financial markets fluctuate in cycles. Identifying the current regime helps in adjusting investment strategies to maximize returns and minimize risks.
 
-Stock markets experience varying levels of volatility, which represent **risk and uncertainty**. Accurately predicting volatility helps market participants anticipate periods of instability.
+* **Why is it important?**
+  Different strategies perform better in specific market conditions. For example, trend-following strategies work well in bull markets, while mean-reversion strategies work in sideways markets. Early identification of regime shifts can save significant capital.
 
-### Why is it important?
+* **Who benefits from solving it?**
+  Investment firms, hedge funds, individual traders, and financial advisory platforms can optimize decision-making and improve risk-adjusted returns.
 
-* Volatility affects:
-
-  * Investment decisions
-  * Risk management
-  * Portfolio allocation
-  * Market regulation
-* Poor volatility estimates increase financial losses.
-
-### Who benefits?
-
-* Investors
-* Portfolio managers
-* Financial institutions
-* Policymakers and analysts
-
-### Type of ML Task
-
-* **Supervised learning – Regression**
+* **Type of ML Task:** **Classification** (predicting discrete regimes: Bull, Bear, Sideways).
 
 ---
 
 ## 3. Data Collection & Understanding
 
-### Dataset Source
+* **Data Sources:**
 
-* **Daily Global Stock Market Indicators Dataset**
-* Contains:
+  * Historical stock indices (S&P 500, NASDAQ, FTSE, etc.)
+  * Technical indicators (moving averages, RSI, MACD)
+  * Volatility indices (VIX)
+  * Macro-economic indicators (interest rates, inflation, GDP growth)
 
-  * Open, High, Low, Close prices
-  * Trading volume
-  * Market index and country information
-  * Daily percentage changes
+* **Exploratory Data Analysis (EDA):**
 
-### Target Variable (Volatility)
+  * Data types:
 
-Define volatility as:
+    * Numerical: closing price, returns, volatility, indicators
+    * Categorical: market regime labels
+  * Check for missing values and handle appropriately
+  * Identify outliers using visualization techniques
+  * Generate summary statistics: mean, median, variance
+  * Visualizations:
 
-* **Rolling standard deviation of daily returns**
-
-  * Example: 5-day or 10-day rolling volatility
-
-### Data Exploration
-
-Perform:
-
-* Inspection of data types (numerical vs categorical)
-* Missing value analysis
-* Outlier detection (extreme returns, volume spikes)
-* Summary statistics (mean, std, min, max)
-
-### Exploratory Data Analysis (EDA)
-
-Include:
-
-* Histogram of daily returns
-* Histogram of volatility
-* Time-series plot of volatility
-* Correlation heatmap of numerical features
-* Boxplots to visualize outliers
+    * Histograms of returns and indicators
+    * Correlation heatmaps
+    * Time-series plots of market indices and regimes
 
 ---
 
 ## 4. Data Preprocessing
 
-### Steps
-
-* Handle missing values:
-
-  * Forward-fill or rolling mean for time-series
-* Encode categorical variables:
-
-  * One-hot encoding for market/index/country
-* Feature scaling:
-
-  * StandardScaler or MinMaxScaler
-* Feature engineering:
-
-  * Lagged returns (t−1, t−2, t−5)
-  * Rolling mean returns
-  * Rolling volume averages
-* Target construction:
-
-  * Rolling volatility (drop NaN rows)
-
-### Data Splitting
-
-* Use **time-based split**:
-
-  * Training set: first 70–80%
-  * Test set: remaining 20–30%
-* Avoid random shuffling (time-series integrity)
+* Handle missing values using forward/backward filling or interpolation
+* Encode categorical labels (e.g., Bull=0, Bear=1, Sideways=2)
+* Normalize or standardize numerical features for better model performance
+* Handle class imbalance using SMOTE or undersampling if regimes are unequally represented
+* Split the dataset into **train (70%)** and **test (30%)** sets
 
 ---
 
 ## 5. Modeling
 
-### Baseline Models
+* **Baseline Models:**
 
-Start with at least two:
+  * Logistic Regression
+  * Random Forest Classifier
 
-1. **Linear Regression**
-2. **Decision Tree Regressor**
+* **Advanced Models:**
 
-### Advanced Models
+  * Gradient Boosting (XGBoost, LightGBM)
+  * Support Vector Machine (SVM)
+  * **Gaussian Mixture Model (GMM):**
 
-* Random Forest Regressor
-* Gradient Boosting / XGBoost
-* (Optional) LSTM for time-series forecasting
+    * Use GMM as an **unsupervised approach** to detect latent market regimes from features like returns and volatility.
+    * Can also be combined with historical labels to validate clusters against known regimes.
+    * Advantage: Captures probabilistic assignments, allowing soft classification of market states.
 
-### Hyperparameter Tuning
+* **Hyperparameter Tuning:**
 
-* Use:
+  * For tree-based models: max_depth, n_estimators, min_samples_split
+  * For GMM: number of components (clusters), covariance type (full, tied, diag, spherical)
 
-  * `GridSearchCV` or `RandomizedSearchCV`
-* Tune:
+* Compare model performance using cross-validation
 
-  * Number of trees
-  * Tree depth
-  * Learning rate (if boosting)
-
-### Model Selection
-
-* Compare models using validation metrics
-* Choose the model with:
-
-  * Best generalization
-  * Lowest error
-  * Reasonable complexity
+* Choose the final model based on accuracy, robustness, interpretability, and cluster quality
 
 ---
 
 ## 6. Evaluation
 
-### Metrics (Regression)
+* **Metrics for Classification:**
 
-* RMSE (Root Mean Squared Error)
-* MAE (Mean Absolute Error)
-* R² Score
+  * Accuracy, Precision, Recall, F1-score
+  * Confusion matrix to analyze misclassifications
+* **GMM Evaluation:**
 
-### Evaluation Visuals
+  * Visualize cluster assignments over time
+  * Compare GMM clusters to known market regimes using adjusted Rand index or normalized mutual information
+  * Analyze cluster probabilities to detect uncertain or transitional regimes
+* **Feature Importance:**
 
-* Actual vs Predicted volatility plot
-* Residual plots
-* Feature importance plot (tree-based models)
+  * Identify which indicators contribute most to regime detection
+  * For GMM, analyze which features separate clusters the most (e.g., via PCA plots)
+* **Validation & Learning Curves:**
 
-### Learning Curves
-
-* Identify:
-
-  * Underfitting (high bias)
-  * Overfitting (high variance)
-
-### Validation Curves
-
-* Analyze impact of:
-
-  * Tree depth
-  * Number of estimators
+  * Check if the model is underfitting or overfitting
+  * Adjust model complexity or features accordingly
 
 ---
 
 ## 7. Error Analysis
 
-### Error Investigation
+* Analyze misclassified regimes
+* Check if certain market conditions (e.g., high volatility) cause more errors
+* Discuss potential causes of errors:
 
-* Identify periods with:
+  * Insufficient historical data for rare regimes
+  * Noisy or weak features
+  * Model limitations for complex patterns
+* Suggest improvements:
 
-  * Large prediction errors
-  * Sudden volatility spikes (crashes, rallies)
-* Compare errors across:
-
-  * Different markets
-  * High vs low volatility regimes
-
-### Possible Causes
-
-* Sudden macroeconomic shocks
-* Limited historical context
-* Lack of external variables (news, macro data)
-
-### Improvement Strategies
-
-* Add longer rolling windows
-* Include market regime indicators
-* Try ensemble or deep learning models
-* Use multi-step forecasting
+  * Collect more data
+  * Engineer better features (lagged indicators, volatility ratios)
+  * Try ensemble models or deeper architectures
+  * Experiment with hybrid approaches: e.g., GMM clustering + supervised classifier
 
 ---
 
 ## 8. Model Interpretation
 
-### Feature Importance
+* Identify the most influential features in predicting market regimes
+* Explain results in simple terms:
 
-* Identify key drivers of volatility:
-
-  * Lagged returns
-  * High–Low price range
-  * Volume changes
-* Explain results simply:
-
-  > “Large price swings and increased trading volume lead to higher market volatility.”
-
-### Practical Interpretation
-
-* High predicted volatility → higher market risk
-* Low volatility → stable market conditions
+  * Example: "High volatility and declining moving averages increase the probability of a Bear regime"
+* Use SHAP or feature importance plots for model interpretability
+* For GMM, visualize clusters in 2D or 3D PCA space to explain cluster separation
 
 ---
 
 ## 9. Deployment
 
-### Option 1: Streamlit App
+* Deploy the model using **Streamlit** to create a simple web app showing:
 
-* User selects:
-
-  * Market/index
-  * Prediction window
-* Output:
-
-  * Predicted volatility
-  * Risk interpretation (Low / Medium / High)
-
-### Option 2: Jupyter Notebook
-
-* Well-documented pipeline
-* Clear markdown explanations
-* Visual outputs and conclusions
-
+  * Predicted current market regime
+  * Key indicators and probabilities
+* Alternatively, provide a well-documented **Jupyter Notebook** with interactive visualizations
+* Include both **supervised model predictions** and **GMM cluster insights**
