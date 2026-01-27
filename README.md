@@ -1,63 +1,51 @@
-# Time Series Forecasting Project: ARIMA & SARIMAX on ETH-USD Dataset
+## Modeling and Forecasting Seasonal Patterns Using SARIMA
 
 ## 1. Project Overview
 
-This project focuses on **time series modeling and forecasting** using historical **Ethereum (ETH) to USD price data**. The main objective is to build, evaluate, and compare **ARIMA** and **SARIMAX** models to understand price dynamics and generate short- to medium-term forecasts.
+This project focuses on analyzing and forecasting time-dependent data using **Seasonal Autoregressive Integrated Moving Average (SARIMA)** models. Time series data often exhibits **trend, seasonality, and autocorrelation**, which violate the assumptions of traditional regression techniques.
 
-The project follows a **structured data science workflow**, starting from data understanding and preprocessing, through exploratory analysis, model development, diagnostics, forecasting, and evaluation.
+By applying SARIMA, this project captures both **short-term dynamics** and **seasonal patterns**, enabling accurate and interpretable forecasts. The project follows a structured analytical workflow consistent with best practices in time series analysis, econometrics, and data science.
 
 ---
 
 ## 2. Problem Statement
 
-Cryptocurrency prices are highly volatile and influenced by trends, seasonality, and external factors. Accurate forecasting is challenging but valuable for:
+Forecasting future values of a variable is critical in many fields such as economics, finance, business, and operations planning. However, real-world time series data is often non-stationary and seasonal, making naïve forecasting methods unreliable.
 
-* Investors and traders
-* Risk management
-* Market analysis and research
+The key problem addressed in this project is:
 
-**Problem Definition:**
-
-> Can historical ETH-USD price data be used to build reliable time series models that capture trends and seasonality and generate meaningful forecasts?
+> **How can historical time series data be modeled to accurately capture seasonality and temporal dependence in order to generate reliable forecasts?**
 
 ---
 
 ## 3. Project Objectives
 
-The main objectives of this project are:
+### 3.1 Main Objective
 
-* To analyze the temporal behavior of ETH-USD prices
-* To test and enforce stationarity in the time series
-* To build and evaluate an **ARIMA** model for baseline forecasting
-* To extend the model using **SARIMAX** to capture seasonality and exogenous effects
-* To compare model performance using statistical metrics
-* To generate and visualize future price forecasts
+To develop a robust **SARIMA-based forecasting model** that accurately predicts future values of the target time series.
+
+### 3.2 Specific Objectives
+
+* To explore and visualize temporal patterns in the data
+* To identify and model trend and seasonality
+* To test and achieve stationarity
+* To select optimal SARIMA parameters
+* To evaluate model performance using appropriate metrics
+* To generate and visualize future forecasts with confidence intervals
 
 ---
 
 ## 4. Dataset Description
 
-### 4.1 Data Source
+The dataset used in this project consists of **time-indexed observations** collected over a specific period.
 
-The dataset contains historical Ethereum price data against the US Dollar (ETH-USD).
+### Key Characteristics
 
-### 4.2 Dataset Structure
+* **Time Frequency:** (e.g., daily, weekly, monthly)
+* **Time Span:** (start date – end date)
+* **Target Variable:** (e.g., sales, demand, price, volatility)
 
-Typical variables in the dataset include:
-
-* **Date** – Trading date (time index)
-* **Open** – Opening price
-* **High** – Highest price of the day
-* **Low** – Lowest price of the day
-* **Close** – Closing price
-* **Volume** – Trading volume
-
-> The **Close price** is used as the primary target variable for time series modeling.
-
-### 4.3 Time Frequency
-
-* Daily observations
-* Continuous time series with chronological ordering
+Optional exogenous variables may be incorporated in future extensions using **SARIMAX**.
 
 ---
 
@@ -65,120 +53,98 @@ Typical variables in the dataset include:
 
 ### 5.1 Data Preprocessing
 
-Steps performed:
-
-* Convert the date column to `datetime` format
-* Set date as the time index
-* Sort data chronologically
-* Handle missing values (forward fill or removal)
-* Select the target variable (Close price)
+* Conversion of the time variable to datetime format
+* Setting the time variable as the index
+* Handling missing values
+* Detecting and treating outliers
+* Ensuring consistent time intervals
 
 ---
 
-### 5.2 Exploratory Data Analysis (EDA)
+### 5.2 Exploratory Time Series Analysis (ETSA)
 
-EDA focuses on understanding the structure and behavior of the time series:
+Exploratory analysis is conducted to understand the structure of the data through:
 
-* Line plots to visualize trends and volatility
-* Rolling mean and rolling standard deviation
-* Seasonal decomposition (trend, seasonality, residuals)
-* Identification of outliers and structural breaks
+* Time series visualization
+* Rolling mean and rolling variance
+* Seasonal decomposition into trend, seasonal, and residual components
+* Autocorrelation Function (ACF)
+* Partial Autocorrelation Function (PACF)
 
 ---
 
 ### 5.3 Stationarity Testing
 
-Stationarity is essential for ARIMA-based models.
+Since SARIMA requires stationarity, the following steps are applied:
 
-Tests applied:
+* Augmented Dickey-Fuller (ADF) test
+* Non-seasonal differencing
+* Seasonal differencing (if required)
 
-* **Augmented Dickey-Fuller (ADF) Test**
-
-Actions taken if non-stationary:
-
-* Differencing (first or second order)
-* Log transformation (if required)
+Stationarity is confirmed before model estimation.
 
 ---
 
 ## 6. Model Development
 
-### 6.1 ARIMA Model
+### 6.1 Baseline ARIMA Model
 
-**ARIMA (p, d, q)** components:
-
-* **p** – Autoregressive order
-* **d** – Degree of differencing
-* **q** – Moving average order
-
-Model selection process:
-
-* ACF and PACF plots
-* Grid search using AIC/BIC criteria
-* Residual diagnostics to confirm white noise behavior
-
-Purpose:
-
-* Serve as a baseline model
-* Capture short-term dependencies and trends
+A baseline ARIMA model is first estimated to capture non-seasonal dynamics. This serves as a benchmark for comparison.
 
 ---
 
-### 6.2 SARIMAX Model
+### 6.2 SARIMA Model
 
-**SARIMAX (p, d, q) × (P, D, Q, s)** extends ARIMA by including:
+The primary model used in this project is defined as:
 
-* Seasonal components
-* Exogenous variables (if available)
+**SARIMA(p, d, q)(P, D, Q, s)**
 
-Key features:
+Where:
 
-* Captures repeating seasonal patterns
-* Handles external regressors (e.g., volume, market indicators)
+* *(p, d, q)* represent non-seasonal parameters
+* *(P, D, Q)* represent seasonal parameters
+* *s* is the seasonal period
 
-Seasonality:
+Model parameters are selected using:
 
-* Determined using decomposition and domain knowledge
-* Common seasonal periods tested (e.g., weekly or monthly cycles)
+* ACF and PACF plots
+* Information criteria (AIC, BIC)
 
 ---
 
 ## 7. Model Evaluation
 
-### 7.1 Train-Test Split
+### 7.1 Performance Metrics
 
-* Data split chronologically (no shuffling)
-* Training set: historical data
-* Test set: most recent observations
+Model accuracy is evaluated using:
 
-### 7.2 Evaluation Metrics
+* Mean Absolute Error (MAE)
+* Root Mean Squared Error (RMSE)
+* Mean Absolute Percentage Error (MAPE)
 
-Models are compared using:
+---
 
-* **Mean Absolute Error (MAE)**
-* **Root Mean Squared Error (RMSE)**
-* **Mean Absolute Percentage Error (MAPE)**
+### 7.2 Diagnostic Checks
 
-Residual analysis:
+To validate the model:
 
-* Autocorrelation of residuals
-* Normality checks
-* Ljung-Box test
+* Residual plots are examined
+* Residual ACF is analyzed
+* Ljung–Box test is applied
+
+A valid model should produce residuals that resemble **white noise**.
 
 ---
 
 ## 8. Forecasting
 
-Forecasting steps:
+The finalized SARIMA model is used to:
 
 * Generate out-of-sample forecasts
-* Visualize forecasts with confidence intervals
-* Compare forecasts against actual values
+* Construct confidence intervals
+* Visualize forecasted values alongside historical data
 
-Forecast horizon:
-
-* Short-term (e.g., 7–30 days)
-* Medium-term (e.g., 60–90 days)
+Forecasts provide actionable insights for planning and decision-making.
 
 ---
 
@@ -186,69 +152,36 @@ Forecast horizon:
 
 This section discusses:
 
-* Model performance comparison (ARIMA vs SARIMAX)
-* Ability to capture trend and seasonality
-* Forecast stability and uncertainty
-* Limitations due to market volatility
-
-Key insights:
-
-* ARIMA performs well for short-term trends
-* SARIMAX improves performance when seasonality is present
-* Prediction uncertainty increases with longer horizons
+* The effectiveness of SARIMA in capturing seasonality
+* Forecast accuracy and reliability
+* Practical implications of the results
+* Model strengths and limitations
 
 ---
 
-## 10. Limitations
+## 10. Conclusion
 
-* Cryptocurrency markets are highly volatile
-* External shocks are not fully captured
-* Models rely solely on historical patterns
-* Long-term forecasts should be interpreted cautiously
+The project demonstrates that **SARIMA models are effective tools for time series forecasting**, particularly when data exhibits clear seasonal patterns. By properly addressing stationarity and model diagnostics, reliable and interpretable forecasts can be achieved.
 
 ---
 
-## 11. Future Improvements
+## 11. Recommendations and Future Work
 
-Possible extensions include:
-
-* Incorporating additional exogenous variables
-* Using volatility models (ARCH/GARCH)
-* Applying deep learning models (LSTM, GRU)
-* Ensemble forecasting approaches
-* Regime-switching time series models
+* Extend the model to **SARIMAX** by incorporating exogenous variables
+* Compare SARIMA forecasts with machine learning models such as LSTM or XGBoost
+* Apply rolling-window forecasting
+* Investigate structural breaks and regime changes
 
 ---
 
-## 12. Project Structure
+## 12. Tools and Technologies
 
-```
-├── data/
-│   └── eth_usd_dataset.csv
-├── notebooks/
-│   ├── data_preprocessing.ipynb
-│   ├── eda.ipynb
-│   ├── arima_model.ipynb
-│   └── sarimax_model.ipynb
-├── results/
-│   ├── forecasts
-│   └── evaluation_metrics
-├── README.md
-```
+* **Programming Language:** Python
+* **Libraries:** pandas, numpy, matplotlib, statsmodels, scikit-learn
+* **Development Environment:** Jupyter Notebook / VS Code
 
 ---
 
-## 13. Tools and Technologies
 
-* Python
-* Pandas, NumPy
-* Matplotlib, Seaborn
-* Statsmodels
-* Scikit-learn
-* Jupyter Notebook
 
----
 
-## 14. Conclusion
-
-This project demonstrates how classical time series models such as **ARIMA** and **SARIMAX** can be effectively applied to cryptocurrency price data. While these models have limitations in highly volatile markets, they provide strong baselines and valuable insights into temporal patterns and forecasting uncertainty.
