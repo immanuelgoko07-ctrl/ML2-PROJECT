@@ -75,7 +75,7 @@ Project title and brief description
 
 Explanation of the Kubeflow + AI pipeline
 
-Clear statement of the dashboard’s purpose
+Clear statement of the dashboard purpose
 
 Use simple language but professional tone.
 
