@@ -1,4 +1,3 @@
-STREAMLIT MASTER PROMPT
 Interactive Electrification Forecasting Dashboard (Kubeflow Project)
  ROLE & EXECUTION MODE
 
