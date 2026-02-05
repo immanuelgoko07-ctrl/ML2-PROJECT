@@ -12,7 +12,7 @@ interactivity
 
 explainable visuals
 
-decision-support design
+decision support design
 
 The application must be suitable for policymakers, researchers, and energy planners.
 
@@ -30,7 +30,7 @@ explains results in plain language
 
 supports data-driven infrastructure planning decisions
 
-The dashboard is a front-end interface for a Kubeflow-powered ML system.
+The dashboard is a front end interface for a Kubeflow-powered ML system.
 
  DATA CONTEXT
 
@@ -63,7 +63,7 @@ Year range slider
 
 Toggle: Total / Rural / Urban electricity access
 
-Forecast horizon selector (e.g. 5–15 years)
+Forecast horizon selector (e.g. 5 to 15 years)
 
 Model selector (ARIMA, LSTM, ML)
 
@@ -96,7 +96,7 @@ Highlight key insights and anomalies
 
 Explain implications for electrification planning
 
- 4. Heat Map & Pattern Analysis Section
+ 4. Heat Map and Pattern Analysis Section
 Visuals:
 
 Country × Year electricity access heat map
@@ -119,14 +119,14 @@ Why certain regions lag
 
 How gaps evolve over time
 
- 5. Forecasting & Prediction Section
+ 5. Forecasting and Prediction Section
 Visuals:
 
 Historical vs predicted electricity access plots
 
 Confidence interval bands
 
-Multi-model comparison graphs
+Multi model comparison graphs
 
 Controls:
 
@@ -142,7 +142,7 @@ Forecast uncertainty
 
 Real-world interpretation of predictions
 
- 6. Model Performance & Trust Section
+ 6. Model Performance and Trust Section
 
 Display:
 
@@ -160,7 +160,7 @@ How reliable the predictions are
 
 Where the model may fail
 
- 7. AI Insights & Recommendations Section
+ 7. AI Insights and Recommendations Section
 
 Use GenAI outputs to:
 
@@ -178,7 +178,7 @@ Bullet points
 
 Callout boxes
 
-Policy-friendly language
+Policy friendly language
 
  8. Download & Export Section
 
@@ -188,7 +188,7 @@ Download forecasts as CSV
 
 Export charts as images
 
-Save country-level reports
+Save country level reports
 
  VISUALIZATION REQUIREMENTS
 
@@ -218,7 +218,7 @@ Ready to integrate with Kubeflow model endpoints
 
 Handle missing data gracefully
 
-Show warnings for low-data countries
+Show warnings for low data countries
 
 Provide user guidance when selections are invalid
 
