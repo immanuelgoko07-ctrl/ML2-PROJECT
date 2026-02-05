@@ -1,6 +1,6 @@
 STREAMLIT MASTER PROMPT
 Interactive Electrification Forecasting Dashboard (Kubeflow Project)
-🧠 ROLE & EXECUTION MODE
+ ROLE & EXECUTION MODE
 
 You are a senior data scientist and MLOps engineer tasked with building a professional Streamlit application for an AI-driven electrification forecasting system deployed via Kubeflow.
 
@@ -16,7 +16,7 @@ decision-support design
 
 The application must be suitable for policymakers, researchers, and energy planners.
 
-📌 APPLICATION PURPOSE
+ APPLICATION PURPOSE
 
 Build an interactive Streamlit dashboard that:
 
@@ -32,7 +32,7 @@ supports data-driven infrastructure planning decisions
 
 The dashboard is a front-end interface for a Kubeflow-powered ML system.
 
-📂 DATA CONTEXT
+ DATA CONTEXT
 
 The dataset includes:
 
@@ -50,8 +50,8 @@ Population (optional)
 
 Assume data is loaded from a CSV or model endpoint.
 
-🧭 DASHBOARD STRUCTURE (MANDATORY)
-🟦 1. Sidebar Controls
+ DASHBOARD STRUCTURE (MANDATORY)
+ 1. Sidebar Controls
 
 Include:
 
@@ -67,7 +67,7 @@ Forecast horizon selector (e.g. 5–15 years)
 
 Model selector (ARIMA, LSTM, ML)
 
-🟦 2. Project Overview Section
+ 2. Project Overview Section
 
 Display:
 
@@ -79,7 +79,7 @@ Clear statement of the dashboard’s purpose
 
 Use simple language but professional tone.
 
-🟦 3. Exploratory Data Analysis (EDA) Section
+ 3. Exploratory Data Analysis (EDA) Section
 Visuals:
 
 Line charts showing electricity access over time
@@ -96,7 +96,7 @@ Highlight key insights and anomalies
 
 Explain implications for electrification planning
 
-🟦 4. Heat Map & Pattern Analysis Section
+ 4. Heat Map & Pattern Analysis Section
 Visuals:
 
 Country × Year electricity access heat map
@@ -119,7 +119,7 @@ Why certain regions lag
 
 How gaps evolve over time
 
-🟦 5. Forecasting & Prediction Section
+ 5. Forecasting & Prediction Section
 Visuals:
 
 Historical vs predicted electricity access plots
@@ -142,7 +142,7 @@ Forecast uncertainty
 
 Real-world interpretation of predictions
 
-🟦 6. Model Performance & Trust Section
+ 6. Model Performance & Trust Section
 
 Display:
 
@@ -160,7 +160,7 @@ How reliable the predictions are
 
 Where the model may fail
 
-🟦 7. AI Insights & Recommendations Section
+ 7. AI Insights & Recommendations Section
 
 Use GenAI outputs to:
 
@@ -180,7 +180,7 @@ Callout boxes
 
 Policy-friendly language
 
-🟦 8. Download & Export Section
+ 8. Download & Export Section
 
 Allow users to:
 
@@ -190,7 +190,7 @@ Export charts as images
 
 Save country-level reports
 
-🎨 VISUALIZATION REQUIREMENTS
+ VISUALIZATION REQUIREMENTS
 
 Use clean, readable charts
 
@@ -202,7 +202,7 @@ Avoid clutter
 
 Prioritize interpretability over decoration
 
-⚙️ TECHNICAL REQUIREMENTS
+ TECHNICAL REQUIREMENTS
 
 Use Streamlit
 
@@ -214,7 +214,7 @@ Clearly separated data loading, modeling, and visualization logic
 
 Ready to integrate with Kubeflow model endpoints
 
-🧪 ERROR HANDLING & UX
+ ERROR HANDLING & UX
 
 Handle missing data gracefully
 
@@ -224,7 +224,7 @@ Provide user guidance when selections are invalid
 
 Ensure fast, responsive UI
 
-🏁 FINAL OUTPUT
+ FINAL OUTPUT
 
 The final Streamlit app must:
 
@@ -236,7 +236,7 @@ Support real planning decisions
 
 Reflect a production-ready Kubeflow AI system
 
-✅ QUALITY BAR
+ QUALITY BAR
 
 Do not produce:
 
