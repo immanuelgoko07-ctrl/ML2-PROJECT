@@ -99,7 +99,7 @@ Explain implications for electrification planning
  4. Heat Map and Pattern Analysis Section
 Visuals:
 
-Country × Year electricity access heat map
+Country and Year electricity access heat map
 
 Rural electrification heat map
 
