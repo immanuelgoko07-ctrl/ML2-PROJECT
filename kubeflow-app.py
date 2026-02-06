@@ -1,1 +1,1 @@
-kubeflow-app
+kubeflow2-app.py
